@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Story Generator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        #prompt {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #storyOutput {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            min-height: 100px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Story Generator</h1>
+    <p>Enter a prompt and I'll write you a story!</p>
+
+    <textarea id="prompt" rows="4" placeholder="e.g. A knight lost in the forest..."></textarea><br>
+    <button onclick="generateStory()">Generate Story</button>
+
+    <h2>Generated Story:</h2>
+    <div id="storyOutput">Your story will appear here...</div>
+
+    <script>
+        async function generateStory() {
+            const promptInput = document.getElementById('prompt');
+            const storyOutput = document.getElementById('storyOutput');
+            const userPrompt = promptInput.value.trim();
+
+            if (!userPrompt) {
+                storyOutput.innerHTML = '<p class="error">Please enter a prompt.</p>';
+                return;
+            }
+
+            storyOutput.innerHTML = 'Generating story... Please wait.';
+
+            try {
+                const response = await fetch('/generate-story', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ prompt: userPrompt })
+                });
+
+                const data = await response.json();
+
+                if (data.story) {
+                    storyOutput.innerHTML = data.story.replace(/\n/g, '<br>');
+                } else {
+                    storyOutput.innerHTML = '<p class="error">No story received.</p>';
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                storyOutput.innerHTML = `<p class="error">An error occurred: ${error.message}</p>`;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
