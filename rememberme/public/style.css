@@ -1,0 +1,239 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fdf5e6; /* Beige */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    color: #6a5acd; /* SlateBlue - calm tone */
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2.5em;
+}
+
+h2 {
+    color: #4682b4; /* SteelBlue */
+    border-bottom: 2px solid #b0c4de; /* LightSteelBlue */
+    padding-bottom: 5px;
+    margin-top: 30px;
+    font-size: 1.8em;
+}
+
+h3 {
+    color: #6a5acd;
+    font-size: 1.4em;
+    margin-top: 20px;
+}
+
+a {
+    color: #4682b4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    display: inline-block; /* Changed from block */
+    margin: 10px 5px 10px 0; /* Adjusted margin */
+    padding: 12px 25px; /* Increased padding */
+    font-size: 1.2em; /* Increased font size */
+    background-color: #b0e0e6; /* PowderBlue */
+    color: #333;
+    border: none;
+    border-radius: 8px; /* Slightly more rounded */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #add8e6; /* LightBlue */
+}
+
+/* Header and Navigation */
+header {
+    background-color: #e6e6fa; /* Lavender */
+    padding: 10px 0;
+    border-bottom: 1px solid #d8bfd8; /* Thistle */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #d8bfd8; /* Thistle */
+    text-decoration: none;
+}
+
+/* Main Content & Page Sections */
+main {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.page {
+    display: none; /* Hide pages by default */
+    padding: 20px;
+    border: 1px solid #eee;
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: #f0f8ff; /* AliceBlue */
+}
+
+.page.active {
+    display: block; /* Show active page */
+}
+
+/* Forms */
+form {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #faf0e6; /* Linen */
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 1.1em; /* Larger labels */
+    color: #555;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    width: calc(100% - 22px); /* Adjust width considering padding and border */
+    padding: 12px; /* Larger padding */
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.1em; /* Larger text input */
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Specific Page Elements */
+.welcome-prompt {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.welcome-prompt p {
+    font-size: 1.5em; /* Larger prompt text */
+    color: #555;
+    margin-bottom: 20px;
+}
+
+#family-tree-display,
+#memories-list,
+#stories-display,
+#patient-info-display {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    min-height: 100px; /* Ensure some height */
+}
+
+/* Simple card style for display items */
+.family-member-card,
+.memory-card,
+.story-card,
+.info-item {
+    background-color: #e6e6fa; /* Lavender */
+    border: 1px solid #d8bfd8; /* Thistle */
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.filter-search {
+    background-color: #faf0e6; /* Linen */
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.filter-search label {
+    margin-right: 5px;
+    display: inline-block; /* Align labels and inputs */
+}
+
+.filter-search input[type="text"] {
+    width: auto; /* Adjust width */
+    margin-right: 15px;
+    display: inline-block;
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px;
+    color: #777;
+    font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+    main {
+        padding: 10px;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 1.1em;
+    }
+    input[type="text"],
+    input[type="number"],
+    textarea {
+        padding: 10px;
+        font-size: 1em;
+    }
+    .filter-search label,
+    .filter-search input[type="text"] {
+        display: block;
+        width: calc(100% - 22px);
+        margin-bottom: 10px;
+    }
+}

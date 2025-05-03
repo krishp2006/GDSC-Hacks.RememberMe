@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RememberMe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>RememberMe 🧠</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#family-tree">👨‍👩‍👧‍👦 Family Tree</a></li>
+                <li><a href="#memories">📝 Memories</a></li>
+                <li><a href="#stored-stories">📚 Stored Stories</a></li>
+                <li><a href="#patient-info">ℹ️ Patient Info</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="page active">
+            <h2>Welcome!</h2>
+            <div class="welcome-prompt">
+                <p>Would you like to remember something today?</p>
+                <button onclick="navigateTo('family-tree')">Let's Remember!</button>
+            </div>
+        </section>
+
+        <section id="family-tree" class="page">
+            <h2>Family Tree 👨‍👩‍👧‍👦</h2>
+            <form id="family-form">
+                <h3>Add Family Member</h3>
+                <label for="familyName">Name:</label>
+                <input type="text" id="familyName" required>
+                <label for="familyRelationship">Relationship:</label>
+                <input type="text" id="familyRelationship" required>
+                <button type="submit">Add Member</button>
+            </form>
+            <div id="family-tree-display">
+                <!-- Family tree visualization will go here -->
+                <p>Family members will be displayed here.</p>
+            </div>
+        </section>
+
+        <section id="memories" class="page">
+            <h2>Add a Memory 📝</h2>
+            <form id="memory-form">
+                <label for="memoryPersonName">Person's Name:</label>
+                <input type="text" id="memoryPersonName" required>
+                <label for="memoryRelationship">Relationship:</label>
+                <input type="text" id="memoryRelationship" required>
+                <label for="memoryText">Memory:</label>
+                <textarea id="memoryText" rows="4" required></textarea>
+                <label for="memoryTags">Tags (comma-separated):</label>
+                <input type="text" id="memoryTags">
+                <button type="submit">Add Memory</button>
+            </form>
+            <div id="memories-list">
+                <!-- Memories will be listed here -->
+                <p>Memories will be displayed here.</p>
+            </div>
+        </section>
+
+        <section id="stored-stories" class="page">
+            <h2>Stored Stories 📚</h2>
+            <div class="filter-search">
+                <label for="filterTag">Filter by Tag:</label>
+                <input type="text" id="filterTag">
+                <label for="filterRelationship">Filter by Relationship:</label>
+                <input type="text" id="filterRelationship">
+                <label for="searchKeyword">Search by Keyword:</label>
+                <input type="text" id="searchKeyword">
+                <button onclick="filterAndSearchMemories()">Filter/Search</button>
+                <button onclick="exportMemories()">Export All as PDF</button> 
+            </div>
+            <div id="stories-display">
+                <!-- All memories displayed here -->
+                <p>All stored stories will appear here.</p>
+            </div>
+        </section>
+
+        <section id="patient-info" class="page">
+            <h2>Patient Information ℹ️</h2>
+            <form id="patient-info-form">
+                <label for="patientName">Name:</label>
+                <input type="text" id="patientName" required>
+                <label for="patientAge">Age:</label>
+                <input type="number" id="patientAge">
+                <label for="patientActivities">Favorite Activities (comma-separated):</label>
+                <input type="text" id="patientActivities">
+                <label for="patientEvents">Notable Life Events (comma-separated):</label>
+                <input type="text" id="patientEvents">
+                <label for="patientHobbies">Hobbies (comma-separated):</label>
+                <input type="text" id="patientHobbies">
+                <label for="patientMedicalNotes">Medical Notes:</label>
+                <textarea id="patientMedicalNotes" rows="4"></textarea>
+                <button type="submit">Save/Update Info</button>
+            </form>
+             <div id="patient-info-display">
+                <!-- Patient info displayed here -->
+                 <p>Patient information will be displayed here.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RememberMe</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
