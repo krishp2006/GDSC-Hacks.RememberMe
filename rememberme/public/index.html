@@ -22,10 +22,15 @@
 
     <main>
         <section id="home" class="page active">
-            <h2>Welcome!</h2>
-            <div class="welcome-prompt">
-                <p>Would you like to remember something today?</p>
-                <button onclick="navigateTo('family-tree')">Let's Remember!</button>
+            <h2>Welcome to RememberMe!</h2>
+            <p>Let's create a story from your memories.</p>
+            <div id="story-generation-controls" style="margin-top: 15px;">
+                <label for="story-prompt-input">Who or what would you like to talk about, or are trying to remember?</label>
+                <input type="text" id="story-prompt-input" placeholder="e.g., 'my childhood dog', 'grandma's cooking'">
+                <button id="generate-story-btn">Generate Story</button>
+            </div>
+            <div id="generated-story-container" style="margin-top: 20px; border: 1px solid #ccc; padding: 15px; min-height: 100px; background-color: #f9f9f9;">
+                <p>Your generated story will appear here...</p>
             </div>
         </section>
 
