@@ -1,15 +1,29 @@
-/* General Styles */
+/* Importing custom font */
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('fonts/proximanova_regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* === General Body Styling === */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #fdf5e6; /* Beige */
+    font-family: 'Proxima Nova', sans-serif;
+    background-color: #fdf5e6;
+    /* Light beige background */
     color: #333;
+    /* Main text color */
     margin: 0;
     padding: 0;
     line-height: 1.6;
 }
 
-h1, h2, h3 {
-    color: #6a5acd; /* SlateBlue - calm tone */
+/* === Headings === */
+h1,
+h2,
+h3 {
+    color: #6a5acd;
+    /* SlateBlue for calm feel */
 }
 
 h1 {
@@ -19,19 +33,21 @@ h1 {
 }
 
 h2 {
-    color: #4682b4; /* SteelBlue */
-    border-bottom: 2px solid #b0c4de; /* LightSteelBlue */
+    color: #4682b4;
+    /* SteelBlue */
+    border-bottom: 2px solid #b0c4de;
+    /* LightSteelBlue border */
     padding-bottom: 5px;
     margin-top: 30px;
     font-size: 1.8em;
 }
 
 h3 {
-    color: #6a5acd;
     font-size: 1.4em;
     margin-top: 20px;
 }
 
+/* === Links === */
 a {
     color: #4682b4;
     text-decoration: none;
@@ -41,28 +57,33 @@ a:hover {
     text-decoration: underline;
 }
 
+/* === Buttons === */
 button {
-    display: inline-block; /* Changed from block */
-    margin: 10px 5px 10px 0; /* Adjusted margin */
-    padding: 12px 25px; /* Increased padding */
-    font-size: 1.2em; /* Increased font size */
-    background-color: #b0e0e6; /* PowderBlue */
+    display: inline-block;
+    margin: 10px 5px 10px 0;
+    padding: 12px 25px;
+    font-size: 1.2em;
+    background-color: #b0e0e6;
+    /* PowderBlue */
     color: #333;
     border: none;
-    border-radius: 8px; /* Slightly more rounded */
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #add8e6; /* LightBlue */
+    background-color: #add8e6;
+    /* LightBlue */
 }
 
-/* Header and Navigation */
+/* === Header and Navigation Bar === */
 header {
-    background-color: #e6e6fa; /* Lavender */
+    background-color: #e6e6fa;
+    /* Lavender */
     padding: 10px 0;
-    border-bottom: 1px solid #d8bfd8; /* Thistle */
+    border-bottom: 1px solid #d8bfd8;
+    /* Thistle border */
 }
 
 nav ul {
@@ -86,11 +107,12 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: #d8bfd8; /* Thistle */
+    background-color: #d8bfd8;
+    /* Thistle */
     text-decoration: none;
 }
 
-/* Main Content & Page Sections */
+/* === Main Container Styling === */
 main {
     max-width: 900px;
     margin: 20px auto;
@@ -100,24 +122,27 @@ main {
     border-radius: 8px;
 }
 
+/* Page toggle logic */
 .page {
-    display: none; /* Hide pages by default */
+    display: none;
     padding: 20px;
     border: 1px solid #eee;
     margin-top: 20px;
     border-radius: 5px;
-    background-color: #f0f8ff; /* AliceBlue */
+    background-color: #f0f8ff;
+    /* AliceBlue */
 }
 
 .page.active {
-    display: block; /* Show active page */
+    display: block;
 }
 
-/* Forms */
+/* === Form Styling === */
 form {
     margin-top: 20px;
     padding: 15px;
-    background-color: #faf0e6; /* Linen */
+    background-color: #faf0e6;
+    /* Linen */
     border-radius: 5px;
 }
 
@@ -125,37 +150,27 @@ label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    font-size: 1.1em; /* Larger labels */
+    font-size: 1.1em;
     color: #555;
 }
 
 input[type="text"],
 input[type="number"],
+input[type="date"],
 textarea {
-    width: calc(100% - 22px); /* Adjust width considering padding and border */
-    padding: 12px; /* Larger padding */
+    width: calc(100% - 22px);
+    padding: 12px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 1.1em; /* Larger text input */
+    font-size: 1.1em;
 }
 
 textarea {
     resize: vertical;
 }
 
-/* Specific Page Elements */
-.welcome-prompt {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.welcome-prompt p {
-    font-size: 1.5em; /* Larger prompt text */
-    color: #555;
-    margin-bottom: 20px;
-}
-
+/* === Content Display Areas === */
 #family-tree-display,
 #memories-list,
 #stories-display,
@@ -165,23 +180,26 @@ textarea {
     background-color: #fff;
     border: 1px dashed #ccc;
     border-radius: 5px;
-    min-height: 100px; /* Ensure some height */
+    min-height: 100px;
 }
 
-/* Simple card style for display items */
+/* === Card-Like Containers === */
 .family-member-card,
 .memory-card,
 .story-card,
 .info-item {
-    background-color: #e6e6fa; /* Lavender */
-    border: 1px solid #d8bfd8; /* Thistle */
+    background-color: #e6e6fa;
+    /* Lavender */
+    border: 1px solid #d8bfd8;
+    /* Thistle */
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 5px;
 }
 
+/* === Filter Search Area === */
 .filter-search {
-    background-color: #faf0e6; /* Linen */
+    background-color: #faf0e6;
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 20px;
@@ -189,17 +207,16 @@ textarea {
 
 .filter-search label {
     margin-right: 5px;
-    display: inline-block; /* Align labels and inputs */
+    display: inline-block;
 }
 
 .filter-search input[type="text"] {
-    width: auto; /* Adjust width */
+    width: auto;
     margin-right: 15px;
     display: inline-block;
 }
 
-
-/* Footer */
+/* === Footer === */
 footer {
     text-align: center;
     margin-top: 30px;
@@ -208,32 +225,147 @@ footer {
     font-size: 0.9em;
 }
 
-/* Responsive Design */
+/* === Responsive Design === */
 @media (max-width: 768px) {
     h1 {
         font-size: 2em;
     }
+
     nav ul li {
         display: block;
         margin: 10px 0;
     }
+
     main {
         padding: 10px;
     }
+
     button {
         padding: 10px 20px;
         font-size: 1.1em;
     }
+
     input[type="text"],
     input[type="number"],
+    input[type="date"],
     textarea {
         padding: 10px;
         font-size: 1em;
     }
+
     .filter-search label,
     .filter-search input[type="text"] {
         display: block;
         width: calc(100% - 22px);
         margin-bottom: 10px;
     }
+}
+
+/* === Home Page Layout (Memory Highlight + Events) === */
+#home {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 10px;
+}
+
+#memory-highlight,
+#upcoming-events {
+    flex: 1 1 45%;
+    background-color: #ffffff;
+    border: 2px dashed #b0c4de;
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 150px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+#memory-highlight:hover,
+#upcoming-events:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#memory-highlight-content {
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #444;
+    font-style: italic;
+}
+
+#upcoming-events-list {
+    margin-top: 10px;
+}
+
+/* Event summary appearance */
+.event-summary-item {
+    background-color: #f0f8ff;
+    /* AliceBlue */
+    border-left: 5px solid #add8e6;
+    /* LightBlue */
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-size: 1.05em;
+}
+
+/* === Optional: Animation on Page Load === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#memory-highlight,
+#upcoming-events {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Stack layout for mobile */
+@media (max-width: 768px) {
+    #home {
+        flex-direction: column;
+    }
+
+    #memory-highlight,
+    #upcoming-events {
+        flex: 1 1 100%;
+    }
+}
+
+/* === Welcome Image and Subtitle Styling === */
+.welcome-image {
+    display: block;
+    margin: 0px auto;
+    max-width: 30%;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+/* Image hover animation */
+.welcome-image-container img {
+    transition: transform 0.3s ease;
+}
+
+.welcome-image-container img:hover {
+    transform: scale(1.05);
+}
+
+/* Gradient background for header */
+header {
+    background: linear-gradient(to right, #e6e6fa, #fdf5e6);
 }

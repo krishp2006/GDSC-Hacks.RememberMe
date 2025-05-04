@@ -1,120 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Page metadata and favicon -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RememberMe</title>
+
+    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <!-- Header with site title and navigation menu -->
     <header>
         <h1>RememberMe 🧠</h1>
+
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#family-tree">👨‍👩‍👧‍👦 Family Tree</a></li>
-                <li><a href="#memories">📝 Memories</a></li>
-                <li><a href="#stored-stories">📚 Stored Stories</a></li>
-                <li><a href="#patient-info">ℹ️ Patient Info</a></li>
+                <li><a href="#family-tree">Family Tree</a></li>
+                <li><a href="#memories">Memories</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#patient-info">Patient Info</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Main content area containing all pages -->
     <main>
+
+        <!-- Home page with welcome message, memory highlight, and events preview -->
         <section id="home" class="page active">
             <h2>Welcome to RememberMe!</h2>
-            <p>Let's create a story from your memories.</p>
-            <div id="memory-retrieval-controls" style="margin-top: 15px;">
-                <label for="person-query-input">Who are you wondering about?</label>
-                <input type="text" id="person-query-input" placeholder="e.g., 'Susan', 'Grandpa'">
-                <button id="retrieve-person-info-btn">Tell me about them</button>
+            <p class="subtitle">Your gentle memory companion</p>
+
+            <!-- Image displayed below welcome text -->
+            <img src="images/RememberMe-ICON.png" alt="Welcome Image" class="welcome-image">
+
+            <!-- Container for displaying a memory highlight -->
+            <div id="memory-highlight" style="margin-bottom: 30px;">
+                <h3>Memory Highlight</h3>
+                <div id="memory-highlight-content">Loading a memory highlight...</div>
+                <button id="refresh-memory-btn">Refresh</button>
             </div>
-            <div id="generated-story-container" style="margin-top: 20px; border: 1px solid #ccc; padding: 15px; min-height: 100px; background-color: #f9f9f9;">
-                <p>Your generated story will appear here...</p>
+
+            <!-- Container for showing upcoming events -->
+            <div id="upcoming-events">
+                <h3>Upcoming Events</h3>
+                <div id="upcoming-events-list">Loading events...</div>
             </div>
         </section>
 
+        <!-- Family Tree page with form and display -->
         <section id="family-tree" class="page">
-            <h2>Family Tree 👨‍👩‍👧‍👦</h2>
+            <h2>Family Tree</h2>
+
+            <!-- Form to add a family member -->
             <form id="family-form">
                 <h3>Add Family Member</h3>
                 <label for="familyName">Name:</label>
                 <input type="text" id="familyName" required>
+
                 <label for="familyRelationship">Relationship:</label>
                 <input type="text" id="familyRelationship" required>
+
                 <button type="submit">Add Member</button>
             </form>
+
+            <!-- Display area for family members -->
             <div id="family-tree-display">
-                <!-- Family tree visualization will go here -->
                 <p>Family members will be displayed here.</p>
             </div>
         </section>
 
+        <!-- Memories page with form and display area -->
         <section id="memories" class="page">
-            <h2>Add a Memory 📝</h2>
+            <h2>Add a Memory</h2>
+
+            <!-- Form to submit a memory -->
             <form id="memory-form">
                 <label for="memoryPersonName">Person's Name:</label>
                 <input type="text" id="memoryPersonName" required>
+
                 <label for="memoryRelationship">Relationship:</label>
                 <input type="text" id="memoryRelationship" required>
+
                 <label for="memoryText">Memory:</label>
                 <textarea id="memoryText" rows="4" required></textarea>
+
                 <label for="memoryTags">Tags (comma-separated):</label>
                 <input type="text" id="memoryTags">
+
                 <button type="submit">Add Memory</button>
             </form>
+
+            <!-- List of submitted memories -->
             <div id="memories-list">
-                <!-- Memories will be listed here -->
                 <p>Memories will be displayed here.</p>
             </div>
         </section>
 
-        <section id="stored-stories" class="page">
-            <h2>Stored Stories 📚</h2>
-            <div class="filter-search">
-                <label for="filterTag">Filter by Tag:</label>
-                <input type="text" id="filterTag">
-                <label for="filterRelationship">Filter by Relationship:</label>
-                <input type="text" id="filterRelationship">
-                <label for="searchKeyword">Search by Keyword:</label>
-                <input type="text" id="searchKeyword">
-                <button onclick="filterAndSearchMemories()">Filter/Search</button>
-                <button onclick="exportMemories()">Export All as PDF</button> 
-            </div>
-            <div id="stories-display">
-                <!-- All memories displayed here -->
-                <p>All stored stories will appear here.</p>
+        <!-- Events page with form and list of events -->
+        <section id="events" class="page">
+            <h2>Events</h2>
+
+            <!-- Form to add a new event -->
+            <form id="event-form">
+                <label for="eventName">Event Name:</label>
+                <input type="text" id="eventName" required>
+
+                <label for="eventDate">Event Date:</label>
+                <input type="date" id="eventDate" required>
+
+                <label for="eventDescription">Description:</label>
+                <textarea id="eventDescription" rows="3"></textarea>
+
+                <button type="submit">Add Event</button>
+            </form>
+
+            <!-- List of upcoming or added events -->
+            <div id="events-list">
+                <p>Scheduled events will appear here.</p>
             </div>
         </section>
 
+        <!-- Patient information section -->
         <section id="patient-info" class="page">
-            <h2>Patient Information ℹ️</h2>
+            <h2>Patient Information</h2>
+
+            <!-- Form to update patient profile -->
             <form id="patient-info-form">
                 <label for="patientName">Name:</label>
                 <input type="text" id="patientName" required>
+
                 <label for="patientAge">Age:</label>
                 <input type="number" id="patientAge">
+
                 <label for="patientActivities">Favorite Activities (comma-separated):</label>
                 <input type="text" id="patientActivities">
+
                 <label for="patientEvents">Notable Life Events (comma-separated):</label>
                 <input type="text" id="patientEvents">
+
                 <label for="patientHobbies">Hobbies (comma-separated):</label>
                 <input type="text" id="patientHobbies">
+
                 <label for="patientMedicalNotes">Medical Notes:</label>
                 <textarea id="patientMedicalNotes" rows="4"></textarea>
+
                 <button type="submit">Save/Update Info</button>
             </form>
-             <div id="patient-info-display">
-                <!-- Patient info displayed here -->
-                 <p>Patient information will be displayed here.</p>
+
+            <!-- Display current patient information -->
+            <div id="patient-info-display">
+                <p>Patient information will be displayed here.</p>
             </div>
         </section>
     </main>
 
+    <!-- Footer with basic copyright -->
     <footer>
         <p>&copy; 2025 RememberMe</p>
     </footer>
 
+    <!-- Main application logic -->
     <script src="script.js"></script>
 </body>
+
 </html>
