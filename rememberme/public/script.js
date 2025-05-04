@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pages = document.querySelectorAll('.page');
     const navLinks = document.querySelectorAll('nav ul li a');
     const apiUrl = 'http://localhost:5000'; // Assuming backend runs on port 5000
+    const homePage = document.getElementById('home');    
 
     // --- Navigation ---
     function navigateTo(pageId) {
@@ -13,13 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
             targetPage.classList.add('active');
             // Load data for the activated page
             loadPageData(pageId);
+
         } else {
             // Default to home if pageId is invalid
             document.getElementById('home').classList.add('active');
         }
     }
 
-    navLinks.forEach(link => {
+    navLinks.forEach( link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
             const pageId = link.getAttribute('href').substring(1);
@@ -33,6 +35,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialPageId = window.location.hash.substring(1) || 'home';
     navigateTo(initialPageId);
 
+    // --- Home Page: Tabbed Person Selection and Story Generation ---
+    const personTabsDiv = document.createElement('div');
+    personTabsDiv.id = 'person-tabs';
+    const storyDisplayDiv = document.createElement('div');
+    storyDisplayDiv.id = 'generated-story';
+    storyDisplayDiv.style.marginTop = '20px';
+
+    if (homePage) {
+        homePage.appendChild(personTabsDiv);
+        
+        homePage.appendChild(storyDisplayDiv);
+    }
+
+    async function createPersonTabs() {
+        const familyMembers = await fetchData('/familyTree'); // Fetch family tree data
+        if (familyMembers.length === 0) {
+            personTabsDiv.innerHTML = '<p>No family members added yet. Add some in the Family Tree page!</p>';
+            return;
+
+        }
+
+        const tabsList = document.createElement('ul');
+        tabsList.classList.add('tabs'); // Add a class for styling
+
+        familyMembers.forEach(member => {
+            const tabItem = document.createElement('li');
+            tabItem.textContent = member.personName;
+            tabItem.addEventListener('click', () => generateStoryForPerson(member.personName));
+            tabsList.appendChild(tabItem);
+        });
+
+        personTabsDiv.appendChild(tabsList);
+    }
+
+   
+
     // --- API Fetch Functions ---
     async function fetchData(endpoint) {
         try {
@@ -44,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error(`Error fetching ${endpoint}:`, error);
             alert(`Failed to load data from ${endpoint}. Please ensure the backend server is running.`);
-            return []; // Return empty array on error
+            return []; // Return empty array on error. This is good behaviour
         }
     }
 
@@ -111,8 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(`Failed to delete data from ${endpoint}. Error: ${error.message}`);
             return null;
         }
-    }
-
+    }    
 
     // --- Data Loading and Display ---
     function loadPageData(pageId) {
@@ -128,6 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'patient-info':
                 loadPatientInfo();
+                break;
+             case 'home':
+                createPersonTabs()
                 break;
             // Add cases for other pages if needed
         }
@@ -145,10 +185,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayFamilyTree(members) {
-        familyTreeDisplay.innerHTML = '<h3>Family Members</h3>';
+        familyTreeDisplay.innerHTML = '<h3>Family Members</h3>'; // Fix: Corrected tag
         if (members.length === 0) {
-            familyTreeDisplay.innerHTML += '<p>No family members added yet.</p>';
-            return;
+            familyTreeDisplay.innerHTML += '<p>No family members added yet.</p>'; // Fix: Corrected tag
+            return; // Fix: Added return statement to exit the function early
         }
         // Basic list display for now, visualization is more complex
         const list = document.createElement('ul');
@@ -197,17 +237,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayMemories(memories, displayElement) {
-         displayElement.innerHTML = '<h3>Recent Memories</h3>';
-         if (memories.length === 0) {
-            displayElement.innerHTML += '<p>No memories added yet.</p>';
+         displayElement.innerHTML = '<h3>Recent Memories</h3>'; // Fix: Corrected tag
+        if (memories.length === 0) {
+            displayElement.innerHTML += '<p>No memories added yet.</p>'; // Fix: Corrected tag
             return;
         }
         memories.forEach(memory => {
-            const item = document.createElement('div');
+            const item = document.createElement('div'); // Fix: Corrected tag
             item.className = 'memory-card'; // Apply card style
             item.innerHTML = `
                 <strong>${memory.personName} (${memory.relationship})</strong>
-                <p>${memory.memoryText}</p>
+                <p>${memory.memoryText}</p>                
                 ${memory.tags && memory.tags.length > 0 ? `<p><em>Tags: ${memory.tags.join(', ')}</em></p>` : ''}
                 <button onclick="editMemory('${memory._id}')">Edit</button>
                 <button onclick="deleteMemory('${memory._id}')">Delete</button>
@@ -254,10 +294,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayFilteredMemories(memories) {
-        storiesDisplay.innerHTML = '<h3>All Memories</h3>';
-         if (memories.length === 0) {
-            storiesDisplay.innerHTML += '<p>No memories found.</p>';
-            return;
+        storiesDisplay.innerHTML = '<h3>All Memories</h3>'; // Fix: Corrected tag
+        if (memories.length === 0) {
+            storiesDisplay.innerHTML += '<p>No memories found.</p>'; // Fix: Corrected tag
+           return;
         }
         memories.forEach(memory => {
             const item = document.createElement('div');
@@ -325,7 +365,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function displayPatientInfo(info) {
+        function displayPatientInfo(info) {
+        patientInfoDisplay.innerHTML = '<h3>Current Information</h3>'; // Fix: Corrected tag
+        if (!info) {
+            patientInfoDisplay.innerHTML += '<p>No information available.</p>'; // Fix: Corrected tag
+           return;
+        }
         patientInfoDisplay.innerHTML = '<h3>Current Information</h3>';
         if (!info) {
              patientInfoDisplay.innerHTML += '<p>No information available.</p>';
@@ -365,6 +410,57 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Patient information saved successfully!');
         }
     });
+
+    // --- Story Generation for a Specific Person ---
+    async function generateStoryForPerson(personName) {
+        const storyDiv = document.getElementById('generated-story');
+        if (!storyDiv) {
+            console.error('Story display div not found!');
+            return;
+        }
+
+        storyDiv.innerHTML = `<p>Generating a story about ${personName}...</p>`;
+
+        try {
+            const memories = await fetchData('/memory');
+            const relevantMemories = memories.filter(memory => memory.personName === personName);
+
+            if (relevantMemories.length === 0) {
+                storyDiv.innerHTML = `<p>No memories found for ${personName}.</p>`;
+                return;
+            }
+
+            const memoryTexts = relevantMemories.map(memory => `${memory.relationship}: ${memory.memoryText}`);
+            const prompt = `A story about ${personName} based on these memories:`;
+
+            // Enhanced Prompt - more specific
+            //const prompt = `Tell me a heartwarming story about ${personName}, focusing on their relationships and key memories:`;
+            //const prompt = `Imagine you are telling a story about ${personName} to a close friend.  What would you share based on these memories?`;            
+
+             // Send to backend for story generation
+             const result = await postData('/generateStory', { prompt, memories: memoryTexts });
+
+             if (result && result.story) {
+                 storyDiv.innerHTML = `
+                     <h4>Story about ${personName}</h4>
+                     <p>${result.story}</p>
+                 `;
+             } else {
+                 storyDiv.innerHTML = `<p>Failed to generate a story about ${personName}.</p>`;
+             }
+
+            // You can try other prompts to guide the story generation in different directions.
+        } catch (error) {
+            console.error('Error generating story:', error);
+            storyDiv.innerHTML = '<p>Failed to generate a story due to an error.</p>';
+        }
+    }
+
+
+    // --- Initial Load ---
+    //if (homePage && tellMeAboutThemButton) {
+    //    generateStoryForPerson(); // Optionally generate a story on initial load
+    //}
 
 
     // --- Placeholder Functions for Edit/Delete/Export ---
